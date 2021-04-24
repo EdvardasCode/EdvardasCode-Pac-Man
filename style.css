@@ -2,8 +2,16 @@ html {
   margin: 10;
   padding: 10;
 }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 .grid {
+  background-color: black;
+  zoom: 1.8;
   display: flex;
   flex-wrap: wrap;
   width: 420px;
@@ -18,12 +26,12 @@ html {
 
 .pac-dot {
   background-color: green;
-  border: 5px solid white;
+  border: 5px solid rgb(0, 0, 0);
   box-sizing: border-box;
 }
 
 .wall {
-  background-color: blue;
+  background-color: rgb(25, 25, 77);
 }
 
 .power-pellet {

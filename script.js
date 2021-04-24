@@ -1,8 +1,8 @@
 const grid = document.querySelector(".grid");
-const score = document.querySelector("#score");
+const scoreDisplay = document.querySelector("#score");
 
 const width = 28;
-
+let score = 0;
 let squares = [];
 
 // 28 by 28 squres
@@ -26,7 +26,7 @@ const layout = [
     1,1,1,1,1,1,0,1,1,4,4,4,4,4,4,4,4,4,4,1,1,0,1,1,1,1,1,1,
     1,1,1,1,1,1,0,1,1,4,1,1,1,2,2,1,1,1,4,1,1,0,1,1,1,1,1,1,
     1,1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,
-    4,4,4,4,4,4,0,0,0,4,1,2,2,2,2,2,2,1,4,0,0,0,4,4,4,4,4,4,
+    4,0,0,0,0,0,0,0,0,4,1,2,2,2,2,2,2,1,4,0,0,0,0,0,0,0,0,4,
     1,1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,
     1,1,1,1,1,1,0,1,1,4,1,1,1,1,1,1,1,1,4,1,1,0,1,1,1,1,1,1,
     1,1,1,1,1,1,0,1,1,4,1,1,1,1,1,1,1,1,4,1,1,0,1,1,1,1,1,1,
@@ -133,6 +133,17 @@ const controls = (e) => {
       break;
   }
   squares[pacmanCurrentIndex].classList.add("pacman");
+  dotsEaten();
 };
 
 document.addEventListener("keyup", controls);
+
+//points and dots eaten
+
+const dotsEaten = () => {
+  if (squares[pacmanCurrentIndex].classList.contains("pac-dot")) {
+    squares[pacmanCurrentIndex].classList.remove("pac-dot");
+    score++;
+    scoreDisplay.innerText = score;
+  }
+};
