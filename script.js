@@ -12,7 +12,7 @@ let squares = [];
 // 3 - power-pellet
 // 4 - empty
 // prettier-ignore
-const layout = [
+const layout1 = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
@@ -45,7 +45,7 @@ const layout = [
 
 // board
 
-const createBoard = () => {
+const createBoard = (layout) => {
   for (let i = 0; i < layout.length; i++) {
     //creating squere
     const square = document.createElement("div");
@@ -64,11 +64,12 @@ const createBoard = () => {
   }
 };
 
-createBoard();
+createBoard(layout1);
 
 //starting position of pacman
 let pacmanCurrentIndex = 500;
-
+const pacmanRotation = document.querySelector(".mouth");
+const mouth = document.createElement("div");
 squares[pacmanCurrentIndex].classList.add("pacman");
 
 //controls of pac man
@@ -91,14 +92,19 @@ const controls = (e) => {
   //     pacmanCurrentIndex += 1;
   //     squares[pacmanCurrentIndex].classList.add("pacman");
   //   }
+
   squares[pacmanCurrentIndex].classList.remove("pacman");
+  squares[pacmanCurrentIndex].appendChild(mouth).classList.add("mouth");
   switch (e.key) {
     case "ArrowUp":
       if (
         !squares[pacmanCurrentIndex - width].classList.contains("wall") &&
         pacmanCurrentIndex - width >= 0
-      )
+      ) {
+        document.querySelector(".mouth").style.transform = "rotate(-90deg)";
         pacmanCurrentIndex -= width;
+      }
+
       break;
     case "ArrowDown":
       if (
@@ -107,15 +113,19 @@ const controls = (e) => {
         ) &&
         !squares[pacmanCurrentIndex + width].classList.contains("wall") &&
         pacmanCurrentIndex + width < width * width
-      )
+      ) {
+        document.querySelector(".mouth").style.transform = "rotate(90deg)";
         pacmanCurrentIndex += width;
+      }
       break;
     case "ArrowLeft":
       if (
         !squares[pacmanCurrentIndex - 1].classList.contains("wall") &&
         pacmanCurrentIndex % width !== 0
-      )
+      ) {
+        document.querySelector(".mouth").style.transform = "rotate(180deg)";
         pacmanCurrentIndex -= 1;
+      }
 
       if (pacmanCurrentIndex === 364) {
         pacmanCurrentIndex += 27;
@@ -125,14 +135,18 @@ const controls = (e) => {
       if (
         !squares[pacmanCurrentIndex + 1].classList.contains("wall") &&
         pacmanCurrentIndex % width < width - 1
-      )
+      ) {
+        document.querySelector(".mouth").style.transform = "rotate(0deg)";
         pacmanCurrentIndex += 1;
+      }
+
       if (pacmanCurrentIndex === 391) {
         pacmanCurrentIndex -= 27;
       }
       break;
   }
   squares[pacmanCurrentIndex].classList.add("pacman");
+  squares[pacmanCurrentIndex].appendChild(mouth).classList.add("mouth");
   dotsEaten();
 };
 
@@ -147,3 +161,11 @@ const dotsEaten = () => {
     scoreDisplay.innerText = score;
   }
 };
+
+class Ghost {
+  constructor(classname, startIndex, speed) {
+    this.classname;
+    this.startIndex;
+    this.speed;
+  }
+}
