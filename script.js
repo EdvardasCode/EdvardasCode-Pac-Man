@@ -163,9 +163,42 @@ const dotsEaten = () => {
 };
 
 class Ghost {
-  constructor(classname, startIndex, speed) {
-    this.classname;
-    this.startIndex;
-    this.speed;
+  constructor(className, startIndex, speed) {
+    this.className = className;
+    this.startIndex = startIndex;
+    this.speed = speed;
+    this.currentIndex = startIndex;
+    this.isScared = false;
+    this.timerId = NaN;
   }
+}
+
+const ghosts = [
+  new Ghost("wooo1", 348, 250),
+  new Ghost("wooo2", 376, 400),
+  new Ghost("wooo3", 351, 300),
+  new Ghost("wooo4", 379, 500),
+];
+
+//draw my ghosts onto my grid
+ghosts.forEach((ghost) =>
+  squares[ghost.startIndex].classList.add(ghost.className)
+);
+
+//move the ghosts
+ghosts.forEach((ghost) => moveGhost(ghost));
+
+function moveGhost(ghost) {
+  console.log("moved ghost");
+  const directions = [-1, +1, -width, +width];
+  let direction = directions[Math.floor(Math.random() * directions.length)];
+  console.log(direction);
+
+  ghost.timerId = setInterval(function () {
+    squares[ghost.currentIndex].classList.remove(ghost.className);
+
+    ghost.currentIndex += direction;
+
+    squares[ghost.currentIndex].classList.add(ghost.className);
+  }, ghost.speed);
 }
