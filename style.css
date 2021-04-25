@@ -47,6 +47,28 @@ body {
   border-radius: 50%;
 }
 
+/* ghosts*/
+.wooo1 {
+  background-color: rgb(165, 16, 16);
+  border: none;
+}
+
+.wooo2 {
+  background-color: rgb(66, 14, 23);
+  border: none;
+}
+
+.wooo3 {
+  background-color: rgb(0, 247, 255);
+  border: none;
+}
+
+.wooo4 {
+  background-color: rgb(221, 168, 69);
+  border: none;
+}
+
+/* pacman*/
 .pacman {
   background-color: rgb(216, 216, 63);
   border-radius: 50%;
