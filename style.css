@@ -68,6 +68,11 @@ body {
   border: none;
 }
 
+.ghost {
+  border-radius: 100% 100% 0 0;
+  display: inline-block;
+}
+
 .scared-ghost {
   background-color: rgb(103, 103, 255);
   border: none;

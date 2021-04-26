@@ -42,7 +42,6 @@ const layout1 = [
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 ]
-
 // board
 
 const createBoard = (layout) => {
@@ -154,10 +153,14 @@ const controls = (e) => {
 document.addEventListener("keyup", controls);
 
 //points and dots eaten
+let dotsLeft = 244;
+
+let powerDots = 4;
 
 const dotsEaten = () => {
   if (squares[pacmanCurrentIndex].classList.contains("pac-dot")) {
     squares[pacmanCurrentIndex].classList.remove("pac-dot");
+    dotsLeft--;
     score++;
     scoreDisplay.innerText = score;
   }
@@ -167,7 +170,7 @@ const powerDotEaten = () => {
   if (squares[pacmanCurrentIndex].classList.contains("power-pellet")) {
     squares[pacmanCurrentIndex].classList.remove("power-pellet");
     score += 10;
-
+    powerDots--;
     ghosts.forEach((ghost) => (ghost.isScared = true));
 
     setTimeout(function () {
@@ -204,10 +207,9 @@ ghosts.forEach((ghost) => {
 ghosts.forEach((ghost) => moveGhost(ghost));
 
 function moveGhost(ghost) {
-  console.log("moved ghost");
   const directions = [-1, +1, -width, +width];
+  //randomizing the movement
   let direction = directions[Math.floor(Math.random() * directions.length)];
-  console.log(direction);
 
   ghost.timerId = setInterval(function () {
     if (
@@ -248,7 +250,7 @@ function moveGhost(ghost) {
   }, ghost.speed);
 }
 
-//check for points left
+//check for points left or game over
 
 const nextLevelOrGameOver = () => {
   if (
@@ -258,5 +260,9 @@ const nextLevelOrGameOver = () => {
     ghosts.forEach((ghost) => clearInterval(ghost.timerId));
     document.removeEventListener("keyup", controls);
     alert("game over");
+  } else if (dotsLeft === 0 && powerDots === 0) {
+    ghosts.forEach((ghost) => clearInterval(ghost.timerId));
+    document.removeEventListener("keyup", controls);
+    alert("You Have Won");
   }
 };
