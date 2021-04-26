@@ -68,6 +68,11 @@ body {
   border: none;
 }
 
+.scared-ghost {
+  background-color: rgb(103, 103, 255);
+  border: none;
+}
+
 /* pacman*/
 .pacman {
   background-color: rgb(216, 216, 63);
