@@ -66,7 +66,7 @@ const createBoard = (layout) => {
 createBoard(layout1);
 
 //starting position of pacman
-let pacmanCurrentIndex = 500;
+let pacmanCurrentIndex = 490;
 const pacmanRotation = document.querySelector(".mouth");
 const mouth = document.createElement("div");
 squares[pacmanCurrentIndex].classList.add("pacman");
